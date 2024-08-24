@@ -1,10 +1,12 @@
 ﻿@page "/election-map"
+@inject ElectionDataService ElectionDataService
+@inject IJSRuntime JSRuntime
 
 <h3>US Election Map</h3>
 
 <div class="year-selector">
     <label for="year-select">Select Year: </label>
-    <select id="year-select" @bind="SelectedYear">
+    <select id="year-select" @bind="SelectedYear" @bind:after="LoadData">
         @foreach (var year in Years)
         {
             <option value="@year">@year</option>
@@ -17,12 +19,16 @@
 @code {
     private List<int> Years = new List<int> { 2000, 2004, 2008, 2012, 2016, 2020 };
     private int SelectedYear = 2020;
+    private List<ElectionResult> electionData;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("initializeMap");
-        }
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        electionData = await ElectionDataService.GetElectionDataAsync(SelectedYear);
+        await JSRuntime.InvokeVoidAsync("updateMap", electionData);
     }
 }
