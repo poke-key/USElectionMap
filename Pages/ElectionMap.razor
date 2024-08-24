@@ -1,5 +1,4 @@
 ﻿@page "/election-map"
-@inject ElectionDataService ElectionDataService
 @inject IJSRuntime JSRuntime
 
 <h3>US Election Map</h3>
@@ -14,21 +13,23 @@
     </select>
 </div>
 
-<div id="map-container" style="width: 100%; height: 500px;"></div>
+<div id="map" style="height: 500px; width: 100%;"></div>
 
 @code {
     private List<int> Years = new List<int> { 2000, 2004, 2008, 2012, 2016, 2020 };
     private int SelectedYear = 2020;
-    private List<ElectionResult> electionData;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await LoadData();
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeMap");
+            await LoadData();
+        }
     }
 
     private async Task LoadData()
     {
-        electionData = await ElectionDataService.GetElectionDataAsync(SelectedYear);
-        await JSRuntime.InvokeVoidAsync("updateMap", electionData);
+        await JSRuntime.InvokeVoidAsync("loadCountyData", SelectedYear);
     }
 }

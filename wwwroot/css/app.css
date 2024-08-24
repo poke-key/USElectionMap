@@ -101,3 +101,8 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+#map {
+    height: 500px;
+    width: 100%;
+}
