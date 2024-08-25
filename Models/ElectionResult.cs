@@ -7,5 +7,4 @@
     public string State { get; set; }
     public double DemocratVotePercentage { get; set; }
     public double RepublicanVotePercentage { get; set; }
-    // Add more properties for demographic data as needed
 }

@@ -1,17 +1,15 @@
-﻿using System.Net.Http.Json;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class ElectionDataService
 {
-    private readonly HttpClient _httpClient;
-
-    public ElectionDataService(HttpClient httpClient)
+    public Task<List<ElectionResult>> GetElectionDataAsync(int year)
     {
-        _httpClient = httpClient;
-    }
-
-    public async Task<List<ElectionResult>> GetElectionDataAsync(int year)
-    {
-        //placeholder, actual API call goes here
-        return await _httpClient.GetFromJsonAsync<List<ElectionResult>>($"sample-data/election-data-{year}.json");
+        // Mock data
+        var mockData = new List<ElectionResult>
+        {
+            new ElectionResult { Year = year, CountyName = "Sample County", State = "Sample State", DemocratVotePercentage = 50, RepublicanVotePercentage = 50 }
+        };
+        return Task.FromResult(mockData);
     }
 }
