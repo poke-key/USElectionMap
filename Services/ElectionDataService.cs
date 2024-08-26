@@ -5,7 +5,7 @@
     public Task<List<ElectionResult>> GetElectionDataAsync(int year)
     {
         var mockData = new List<ElectionResult>();
-        for (int i = 1; i <= 3000; i++) // Generating data for 3000 counties
+        for (int i = 1; i <= 3000; i++) //gen data for 3000 total US counties
         {
             var democratPercentage = _random.NextDouble() * 100;
             mockData.Add(new ElectionResult

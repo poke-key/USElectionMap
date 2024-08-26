@@ -9,7 +9,7 @@ window.initializeMap = async function () {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Fetch and add county boundaries
+        //fetch the county boundaries and add using this file
         const response = await fetch('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json');
         const countyData = await response.json();
         geojson = L.geoJSON(countyData, {
