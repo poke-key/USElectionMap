@@ -1,15 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-public class ElectionDataService
+﻿public class ElectionDataService
 {
+    private readonly Random _random = new Random();
+
     public Task<List<ElectionResult>> GetElectionDataAsync(int year)
     {
-        // Mock data
-        var mockData = new List<ElectionResult>
+        var mockData = new List<ElectionResult>();
+        for (int i = 1; i <= 3000; i++) // Generating data for 3000 counties
         {
-            new ElectionResult { Year = year, CountyName = "Sample County", State = "Sample State", DemocratVotePercentage = 50, RepublicanVotePercentage = 50 }
-        };
+            var democratPercentage = _random.NextDouble() * 100;
+            mockData.Add(new ElectionResult
+            {
+                Year = year,
+                CountyFips = i.ToString("D5"),
+                CountyName = $"County {i}",
+                State = "State",
+                DemocratVotePercentage = democratPercentage,
+                RepublicanVotePercentage = 100 - democratPercentage
+            });
+        }
         return Task.FromResult(mockData);
     }
 }
