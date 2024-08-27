@@ -11,3 +11,7 @@ Each election map will consist of the racial demographics of each county during 
 Utilizes Blazor for services and features.
 
 If possible, there will be an AI copilot for answering questions about the election results from the user.
+
+Contribute:
+
+Have Visual Studio 2022 and the ASP.NET and other dependendcies installed on it.
