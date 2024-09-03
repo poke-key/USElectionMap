@@ -49,8 +49,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or feedback, please reach out to the project maintainers at [your-email@example.com].
-
----
-
-Feel free to replace placeholders like `yourusername` and `your-email@example.com` with the appropriate information for your project. This version adds structure, clarity, and professionalism to your README, making it easier for contributors and users to understand and engage with your project.
+For any questions or feedback, please reach out to the project maintainers at [kunalshrivastav345@gmail.com].
