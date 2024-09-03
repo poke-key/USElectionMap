@@ -1,7 +1,3 @@
-Here's a more professionally formatted version of your README for the "USElectionMap" project:
-
----
-
 # USElectionMap
 
 ## Project Objectives
