@@ -1,17 +1,48 @@
 # USElectionMap
 
-Objectives:
+## Project Objectives
 
-Display County by county presidential election results of the 21st century.
+The **USElectionMap** project aims to provide a comprehensive visualization of presidential election results in the United States on a county-by-county basis for the 21st century. This includes election data from the years **2000, 2004, 2008, 2012, 2016,** and **2020**.
 
-This includes elections 2000,2004,2008,2012, 2016, and 2020. 
+### Key Features
 
-Each election map will consist of the racial demographics of each county during that year and how they voted in that county or state, whichever data is avaliable.
+- **Election Results Visualization**: Display detailed maps showing the voting outcomes for each county during the selected election year.
+- **Demographic Integration**: Each election map includes racial demographic data for every county during the selected year, offering insights into voting patterns and trends.
+- **Blazor Framework**: The project leverages the **Blazor** framework to provide dynamic web services and interactive features.
+- **AI Copilot (Future Enhancement)**: If feasible, an AI-driven assistant will be integrated to answer user queries about the election results, providing insights and interpretations of the data.
 
-Utilizes Blazor for services and features.
+## Getting Started
 
-If possible, there will be an AI copilot for answering questions about the election results from the user.
+### Prerequisites
 
-Contribute:
+To contribute to the **USElectionMap** project, ensure you have the following:
 
-Have Visual Studio 2022 and the ASP.NET and other dependendcies installed on it.
+- **Visual Studio 2022**: The latest version with support for .NET development.
+- **ASP.NET Core**: Make sure to have the ASP.NET Core workload and other necessary dependencies installed.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/USElectionMap.git
+   ```
+2. Open the solution file in **Visual Studio 2022**.
+3. Restore the necessary NuGet packages and build the solution.
+
+### Contributing
+
+We welcome contributions to the **USElectionMap** project. Please follow the [contribution guidelines](CONTRIBUTING.md) and adhere to our code of conduct.
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or feedback, please reach out to the project maintainers at [kunalshrivastav345@gmail.com].
