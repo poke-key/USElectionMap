@@ -4,14 +4,33 @@
 
 <h3>US Election Map</h3>
 
-<div class="year-selector">
-    <label for="year-select">Select Year: </label>
-    <select id="year-select" @bind="SelectedYear" @bind:after="LoadData">
-        @foreach (var year in Years)
-        {
-            <option value="@year">@year</option>
-        }
-    </select>
+<div class="year-slider">
+    <label for="year-slider">Select Year: </label>
+    <input type="range" id="year-slider" min="2000" max="2020" step="4" @bind="SelectedYear" @bind:after="LoadData" />
+    <span>@SelectedYear</span>
+</div>
+
+<div class="legend">
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #0000FF;"></div>
+        <span>Democrat >60%</span>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #4169E1;"></div>
+        <span>Democrat 50-60%</span>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #ADD8E6;"></div>
+        <span>Democrat 40-50%</span>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #FFCCCB;"></div>
+        <span>Democrat 30-40%</span>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #FF0000;"></div>
+        <span>Republican >60%</span>
+    </div>
 </div>
 
 <div id="map" style="height: 600px; width: 100%;"></div>

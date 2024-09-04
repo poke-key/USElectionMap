@@ -9,7 +9,6 @@ window.initializeMap = async function () {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        //fetch the county boundaries and add using this file
         const response = await fetch('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json');
         const countyData = await response.json();
         geojson = L.geoJSON(countyData, {
@@ -33,9 +32,11 @@ window.updateMap = function (data) {
             if (countyData) {
                 const color = getColor(countyData.democratVotePercentage);
                 layer.setStyle({ fillColor: color, fillOpacity: 0.7 });
-                layer.bindPopup(`County: ${layer.feature.properties.NAME}<br>
-                                 Democrat: ${countyData.democratVotePercentage.toFixed(2)}%<br>
+                layer.bindPopup(`County: ${layer.feature.properties.NAME}
+                                 Democrat: ${countyData.democratVotePercentage.toFixed(2)}%
                                  Republican: ${countyData.republicanVotePercentage.toFixed(2)}%`);
+            } else {
+                layer.setStyle({ fillColor: '#CCCCCC', fillOpacity: 0.7 });
             }
         });
     }
