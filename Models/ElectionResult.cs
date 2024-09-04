@@ -1,6 +1,5 @@
 ﻿public class ElectionResult
 {
-    public int Id { get; set; }
     public int Year { get; set; }
     public string CountyFips { get; set; }
     public string CountyName { get; set; }

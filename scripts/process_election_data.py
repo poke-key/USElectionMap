@@ -29,7 +29,7 @@ for year in [2000, 2004, 2008, 2012, 2016, 2020]:
 
             results.append({
                 'Year': int(row['year']),
-                'CountyFips': row['county_fips'],
+                'CountyFips': str(row['county_fips']).zfill(5),  # Convert to string and ensure 5 digits
                 'CountyName': row['county_name'],
                 'State': row['state'],
                 'DemocratVotePercentage': dem_percentage,
