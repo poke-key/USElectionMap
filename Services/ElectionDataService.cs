@@ -1,23 +1,26 @@
-﻿public class ElectionDataService
-{
-    private readonly Random _random = new Random();
+﻿using System.Net.Http.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-    public Task<List<ElectionResult>> GetElectionDataAsync(int year)
+public class ElectionDataService
+{
+    private readonly HttpClient _httpClient;
+
+    public ElectionDataService(HttpClient httpClient)
     {
-        var mockData = new List<ElectionResult>();
-        for (int i = 1; i <= 3000; i++) //gen data for 3000 total US counties
+        _httpClient = httpClient;
+    }
+
+    public async Task<List<ElectionResult>> GetElectionDataAsync(int year)
+    {
+        try
         {
-            var democratPercentage = _random.NextDouble() * 100;
-            mockData.Add(new ElectionResult
-            {
-                Year = year,
-                CountyFips = i.ToString("D5"),
-                CountyName = $"County {i}",
-                State = "State",
-                DemocratVotePercentage = democratPercentage,
-                RepublicanVotePercentage = 100 - democratPercentage
-            });
+            return await _httpClient.GetFromJsonAsync<List<ElectionResult>>($"data/election_results_{year}.json");
         }
-        return Task.FromResult(mockData);
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"Error fetching election data for year {year}: {e.Message}");
+            return new List<ElectionResult>();
+        }
     }
 }
