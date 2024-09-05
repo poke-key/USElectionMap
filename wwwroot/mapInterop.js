@@ -25,6 +25,7 @@ window.initializeMap = async function () {
 }
 
 window.updateMap = function (data) {
+    console.log("Updating map with data:", data);
     if (geojson) {
         geojson.eachLayer(function (layer) {
             const countyFips = layer.feature.id;
@@ -32,8 +33,8 @@ window.updateMap = function (data) {
             if (countyData) {
                 const color = getColor(countyData.democratVotePercentage);
                 layer.setStyle({ fillColor: color, fillOpacity: 0.7 });
-                layer.bindPopup(`County: ${layer.feature.properties.NAME}
-                                 Democrat: ${countyData.democratVotePercentage.toFixed(2)}%
+                layer.bindPopup(`County: ${layer.feature.properties.NAME}<br>
+                                 Democrat: ${countyData.democratVotePercentage.toFixed(2)}%<br>
                                  Republican: ${countyData.republicanVotePercentage.toFixed(2)}%`);
             } else {
                 layer.setStyle({ fillColor: '#CCCCCC', fillOpacity: 0.7 });

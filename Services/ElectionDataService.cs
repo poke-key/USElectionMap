@@ -1,6 +1,4 @@
 ﻿using System.Net.Http.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 public class ElectionDataService
 {
@@ -15,7 +13,9 @@ public class ElectionDataService
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<List<ElectionResult>>($"data/election_results_{year}.json");
+            var results = await _httpClient.GetFromJsonAsync<List<ElectionResult>>($"data/election_results_{year}.json");
+            Console.WriteLine($"Loaded {results.Count} results for year {year}");
+            return results;
         }
         catch (HttpRequestException e)
         {

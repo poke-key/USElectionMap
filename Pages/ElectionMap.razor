@@ -10,48 +10,47 @@
     <span>@SelectedYear</span>
 </div>
 
-<div class="legend">
-    <div class="legend-item">
-        <div class="legend-color" style="background-color: #0000FF;"></div>
-        <span>Democrat >60%</span>
-    </div>
-    <div class="legend-item">
-        <div class="legend-color" style="background-color: #4169E1;"></div>
-        <span>Democrat 50-60%</span>
-    </div>
-    <div class="legend-item">
-        <div class="legend-color" style="background-color: #ADD8E6;"></div>
-        <span>Democrat 40-50%</span>
-    </div>
-    <div class="legend-item">
-        <div class="legend-color" style="background-color: #FFCCCB;"></div>
-        <span>Democrat 30-40%</span>
-    </div>
-    <div class="legend-item">
-        <div class="legend-color" style="background-color: #FF0000;"></div>
-        <span>Republican >60%</span>
-    </div>
-</div>
+<!-- ... (legend code remains the same) ... -->
 
 <div id="map" style="height: 600px; width: 100%;"></div>
+
+<div>
+    <h4>Debug Info:</h4>
+    <p>Data Count: @(electionData?.Count ?? 0)</p>
+    <p>First Item: @(electionData?.FirstOrDefault()?.ToString() ?? "No data")</p>
+</div>
 
 @code {
     private List<int> Years = new List<int> { 2000, 2004, 2008, 2012, 2016, 2020 };
     private int SelectedYear = 2020;
     private List<ElectionResult> electionData;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await JSRuntime.InvokeVoidAsync("initializeMap");
-            await LoadData();
+            await UpdateMapData();
         }
     }
 
     private async Task LoadData()
     {
         electionData = await ElectionDataService.GetElectionDataAsync(SelectedYear);
-        await JSRuntime.InvokeVoidAsync("updateMap", electionData);
+        await UpdateMapData();
+        StateHasChanged();
+    }
+
+    private async Task UpdateMapData()
+    {
+        if (electionData != null)
+        {
+            await JSRuntime.InvokeVoidAsync("updateMap", electionData);
+        }
     }
 }
