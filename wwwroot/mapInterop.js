@@ -27,10 +27,12 @@ window.initializeMap = async function () {
 window.updateMap = function (data) {
     console.log("Updating map with data:", data);
     if (geojson) {
+        let matchCount = 0;
         geojson.eachLayer(function (layer) {
             const countyFips = layer.feature.properties.STATE + layer.feature.properties.COUNTY;
             const countyData = data.find(d => d.countyFips === countyFips);
             if (countyData) {
+                matchCount++;
                 const color = getColor(countyData.democratVotePercentage);
                 layer.setStyle({ fillColor: color, fillOpacity: 0.7 });
                 layer.bindPopup(`County: ${layer.feature.properties.NAME}<br>
@@ -41,6 +43,7 @@ window.updateMap = function (data) {
                 layer.setStyle({ fillColor: '#CCCCCC', fillOpacity: 0.7 });
             }
         });
+        console.log(`Matched ${matchCount} counties out of ${data.length} data points`);
     }
 }
 

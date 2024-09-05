@@ -41,7 +41,9 @@
 
     private async Task LoadData()
     {
+        Console.WriteLine($"Loading data for year {SelectedYear}");
         electionData = await ElectionDataService.GetElectionDataAsync(SelectedYear);
+        Console.WriteLine($"Loaded {electionData.Count} records");
         await UpdateMapData();
         StateHasChanged();
     }
