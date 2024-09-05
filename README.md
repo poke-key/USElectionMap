@@ -1,4 +1,4 @@
-# USElectionMap
+# Demographic Visualization of 21st Century Presidential Elections
 
 ## Project Objectives
 
