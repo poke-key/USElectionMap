@@ -28,12 +28,13 @@ window.updateMap = function (data) {
     console.log("Updating map with data:", data);
     if (geojson) {
         geojson.eachLayer(function (layer) {
-            const countyFips = layer.feature.id;
+            const countyFips = layer.feature.properties.STATE + layer.feature.properties.COUNTY;
             const countyData = data.find(d => d.countyFips === countyFips);
             if (countyData) {
                 const color = getColor(countyData.democratVotePercentage);
                 layer.setStyle({ fillColor: color, fillOpacity: 0.7 });
                 layer.bindPopup(`County: ${layer.feature.properties.NAME}<br>
+                                 State: ${countyData.state}<br>
                                  Democrat: ${countyData.democratVotePercentage.toFixed(2)}%<br>
                                  Republican: ${countyData.republicanVotePercentage.toFixed(2)}%`);
             } else {
